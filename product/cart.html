@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product cart Data</title>
+    <link rel = "stylesheet" href="index.css" />
+</head>
+<body>
+   <p></p>
+    <h1>Cart Data</h1>
+    <button onclick="GotoBack()">Home page</button>
+    <div id = "container"></div>
+    
+</body>
+</html>
+
+<script>
+
+var container = document.querySelector("#container");
+var cartData = JSON.parse(localStorage.getItem("cartData"));
+
+ var totalSum = cartData.reduce(function(sum,ele,index){
+     return sum + Number(ele.price);
+     
+ })
+var length = cartData.length;
+ document.querySelector("p").innerText = length + " " +totalSum;
+
+function displayData(){
+    document.querySelector("#container").innerHTML="";
+    cartData.forEach(function(product,index){
+        var box = document.createElement("div");
+        box.setAttribute("class","box")
+
+        var image = document.createElement("img");
+        image.src = product.image_url;
+
+        var name = document.createElement("p");
+        name.innerText = product.name;
+
+        var price = document.createElement("p");
+        price.innerText = product.price;
+
+        var removeBtn = document.createElement("button");
+        removeBtn.innerText = "Remove Item";
+
+        removeBtn.addEventListener("click",function(){
+            // // removeItem(product);
+            // localStorage.removeItem("cartData");
+            cartData.splice(index,1);
+            localStorage.setItem("cartData",JSON.stringify(cartData));
+            window.location.reload();
+
+        })
+        box.append(image,name,price,removeBtn);
+        container.append(box);
+    })
+    
+
+}
+displayData();
+function GotoBack(){
+    window.location.href = "index.html";
+}
+
+
+
+
+</script>

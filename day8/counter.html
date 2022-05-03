@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter</title>
+</head>
+<body>
+    <h1 id = "zero">0</h1>
+    <button onclick="increase()" id = "increase">Increase</button>
+    <button onclick="decrease()" id = "decrease">Decrease</button>
+    
+</body>
+</html>
+<script>
+   // var increaseButton = document.querySelector("#increase");
+   var count;
+   if(localStorage.getItem("count")===null){
+       count = 0;
+   }
+   else{
+      count =  localStorage.getItem("count") ;
+
+   }
+   
+
+
+   function increase(){
+    count++;
+    localStorage.setItem("count",count);
+    document.getElementById("zero").innerText = count;
+   }
+
+   function decrease(){
+    count--;
+    localStorage.setItem("count",count);
+    document.getElementById("zero").innerText = count;
+   }
+ document.getElementById("zero").innerText = count;
+ 
+
+</script>
